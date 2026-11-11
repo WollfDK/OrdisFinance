@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\OrdisFinance.Application\OrdisFinance.Application.csproj" />
+    <ProjectReference Include="..\OrdisFinance.Infrastructure\OrdisFinance.Infrastructure.csproj" />
+    <ProjectReference Include="..\OrdisFinance.Domain\OrdisFinance.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ordis_icon.ico" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>ordis_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+</Project>

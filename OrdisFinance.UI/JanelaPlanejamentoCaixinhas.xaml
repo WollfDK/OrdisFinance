@@ -1,0 +1,412 @@
+﻿<Window x:Class="OrdisFinance.UI.JanelaPlanejamentoCaixinhas"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MINI-ORDIS // CAIXINHAS DE PLANEJAMENTO &amp; ESTRATEGISTA NEURAL" Height="740" Width="1180"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        FontFamily="Consolas, Segoe UI">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="Background" Value="#060609"/>
+            <Setter Property="Width" Value="8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Border Background="#060609" BorderBrush="#152232" BorderThickness="1" CornerRadius="4">
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="{x:Type Thumb}">
+                                                <Border CornerRadius="4" Margin="1" Background="#00FF66"/>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NeonGreenButton" TargetType="Button">
+            <Setter Property="Background" Value="#0A0A10"/>
+            <Setter Property="Foreground" Value="#00FF66"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="14,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BordaNeon" Background="{TemplateBinding Background}" CornerRadius="4" BorderThickness="1.8" Padding="{TemplateBinding Padding}">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#00FF66" Offset="0.0"/>
+                                    <GradientStop Color="#00E5FF" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BordaNeon" Property="Background" Value="#0D2216"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NeonCyanButton" TargetType="Button">
+            <Setter Property="Background" Value="#0A0A10"/>
+            <Setter Property="Foreground" Value="#00F0FF"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="14,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BordaNeon" Background="{TemplateBinding Background}" CornerRadius="4" BorderThickness="1.6" Padding="{TemplateBinding Padding}">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#00F0FF" Offset="0.0"/>
+                                    <GradientStop Color="#7000FF" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BordaNeon" Property="Background" Value="#0B1C26"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NeonRedButton" TargetType="Button">
+            <Setter Property="Background" Value="#0A0A10"/>
+            <Setter Property="Foreground" Value="#FF0055"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="14,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BordaNeon" Background="{TemplateBinding Background}" CornerRadius="4" BorderThickness="1.5" BorderBrush="#FF0055" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BordaNeon" Property="Background" Value="#260B15"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TitleCloseButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FF0055"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bg" Background="{TemplateBinding Background}" CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bg" Property="Background" Value="#FF0055"/>
+                                <Setter Property="Foreground" Value="#08080C"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#060609"/>
+            <Setter Property="Foreground" Value="#E0F8FF"/>
+            <Setter Property="BorderBrush" Value="#1F293A"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="FontSize" Value="12.5"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Foreground" Value="#00F0FF"/>
+            <Setter Property="Background" Value="#060609"/>
+            <Setter Property="BorderBrush" Value="#1F293A"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Focusable="False"
+                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          ClickMode="Press">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border x:Name="BordaCombo" Background="#060609" BorderBrush="#1F293A" BorderThickness="1" CornerRadius="2">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="22"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Path Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z" Fill="#00F0FF"/>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <ContentPresenter IsHitTestVisible="False"
+                                              Content="{TemplateBinding SelectionBoxItem}"
+                                              Margin="8,5,22,5"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Left"/>
+                            <Popup Placement="Bottom"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   PopupAnimation="Slide">
+                                <Grid MinWidth="{TemplateBinding ActualWidth}" MaxHeight="200">
+                                    <Border Background="#08080C" BorderThickness="1" BorderBrush="#00F0FF" CornerRadius="4">
+                                        <ScrollViewer Margin="2">
+                                            <StackPanel IsItemsHost="True"/>
+                                        </ScrollViewer>
+                                    </Border>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="#08080C"/>
+            <Setter Property="Foreground" Value="#E0F8FF"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border x:Name="ItemBorder" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="True">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="#0D2636"/>
+                                <Setter Property="Foreground" Value="#00FF66"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border Background="#08080C" BorderBrush="#00F0FF" BorderThickness="1.8" CornerRadius="6" Margin="10">
+        <Border.Effect>
+            <DropShadowEffect Color="#00F0FF" BlurRadius="18" ShadowDepth="0" Opacity="0.4"/>
+        </Border.Effect>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="38"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- BARRA DE TITULO -->
+            <Border Grid.Row="0" Background="#050508" BorderBrush="#1A2636" BorderThickness="0,0,0,1" CornerRadius="5,5,0,0"
+                    MouseLeftButtonDown="BarraTitulo_MouseLeftButtonDown" Padding="14,0,8,0">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="🎯" Foreground="#00FF66" FontSize="13" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock Text="MINI-ORDIS // CENTRAL DE PLANEJAMENTO (CAIXINHAS COM VALOR PRÉ-DEFINIDO) &amp; ESTRATEGISTA TÁTICO" Foreground="#00F0FF" FontSize="12.5" FontWeight="Bold" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✖" Style="{StaticResource TitleCloseButton}" HorizontalAlignment="Right" VerticalAlignment="Center" Click="BtnFechar_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- CORPO DIVIDIDO: ESQUERDA (CAIXINHAS E VALORES PRE-DEFINIDOS) | DIREITA (ESTRATEGISTA DO MINI-ORDIS) -->
+            <Grid Grid.Row="1" Margin="16,12,16,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.25*"/>
+                    <ColumnDefinition Width="1.05*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- COLUNA ESQUERDA: CAIXINHAS DE PLANEJAMENTO -->
+                <Border Grid.Column="0" Background="#0E0E16" BorderBrush="#1A2636" BorderThickness="1" CornerRadius="6" Padding="14" Margin="0,0,8,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="1. CRIAR OU CONFIGURAR CAIXINHA DE PLANEJAMENTO" Foreground="#00FF66" FontSize="13" FontWeight="Bold" Margin="0,0,0,8"/>
+
+                        <!-- FORMULARIO DA CAIXINHA -->
+                        <Border Grid.Row="1" Background="#08080C" BorderBrush="#162232" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,0,0,10">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.7*"/>
+                                        <ColumnDefinition Width="0.9*"/>
+                                        <ColumnDefinition Width="0.8*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Margin="0,0,6,0">
+                                        <TextBlock Text="Nome da Caixinha / Objetivo:" Foreground="#8AA4C0" FontSize="10.5"/>
+                                        <TextBox x:Name="TxtTituloCaixinha" Margin="0,2,0,0" ToolTip="Ex: Caixinha para a Viagem, Novos Upgrades nos PCs"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Margin="0,0,6,0">
+                                        <TextBlock Text="Data Alvo:" Foreground="#8AA4C0" FontSize="10.5"/>
+                                        <TextBox x:Name="TxtDataCaixinha" Margin="0,2,0,0" MaxLength="10"
+                                                 PreviewTextInput="ApenasDigitos_PreviewTextInput"
+                                                 TextChanged="TxtDataCaixinha_TextChanged"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="Prioridade:" Foreground="#8AA4C0" FontSize="10.5"/>
+                                        <ComboBox x:Name="ComboPrioridadeCaixinha" Margin="0,2,0,0"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Margin="0,0,6,0">
+                                        <TextBlock Text="Valor Pré-Definido / Meta (R$):" Foreground="#00F0FF" FontSize="10.5" FontWeight="Bold"/>
+                                        <TextBox x:Name="TxtValorAlvoCaixinha" Margin="0,2,0,0" Foreground="#00F0FF" FontWeight="Bold"
+                                                 PreviewTextInput="ApenasDigitos_PreviewTextInput"
+                                                 TextChanged="CampoMoeda_TextChanged"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Margin="0,0,8,0">
+                                        <TextBlock Text="Já Guardado na Caixinha (R$):" Foreground="#00FF66" FontSize="10.5" FontWeight="Bold"/>
+                                        <TextBox x:Name="TxtValorAtualCaixinha" Margin="0,2,0,0" Foreground="#00FF66" FontWeight="Bold"
+                                                 PreviewTextInput="ApenasDigitos_PreviewTextInput"
+                                                 TextChanged="CampoMoeda_TextChanged"/>
+                                    </StackPanel>
+                                    <Button x:Name="BtnSalvarCaixinha" Grid.Column="2" Content="✔ SALVAR CAIXINHA" Style="{StaticResource NeonGreenButton}" Click="BtnSalvarCaixinha_Click" VerticalAlignment="Bottom" Margin="0,0,6,0" Padding="12,7" FontSize="11.5"/>
+                                    <Button Grid.Column="3" Content="↺ NOVA" Style="{StaticResource NeonCyanButton}" Click="BtnLimparCaixinha_Click" VerticalAlignment="Bottom" Padding="10,7" FontSize="11.5"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- LISTA DE CAIXINHAS COM BARRA DE PROGRESSO NEON -->
+                        <ListBox x:Name="ListaCaixinhas" Grid.Row="2" Background="#08080C" BorderBrush="#1F293A"
+                                 SelectionChanged="ListaCaixinhas_SelectionChanged"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,10">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Margin" Value="0,3"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <Border x:Name="Card" Background="#0B0E17" BorderBrush="#182436" BorderThickness="1" CornerRadius="5" Padding="12,9">
+                                                    <ContentPresenter/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="Card" Property="BorderBrush" Value="#00F0FF"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter TargetName="Card" Property="Background" Value="#10281E"/>
+                                                        <Setter TargetName="Card" Property="BorderBrush" Value="#00FF66"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Grid>
+                                            <TextBlock Text="{Binding TituloExibicao}" Foreground="#00F0FF" FontWeight="Bold" FontSize="13"/>
+                                            <TextBlock Text="{Binding ProgressoTexto}" Foreground="#00FF66" FontWeight="Bold" FontSize="12.5" HorizontalAlignment="Right"/>
+                                        </Grid>
+                                        <ProgressBar Height="8" Minimum="0" Maximum="100" Value="{Binding PercentualConcluido, Mode=OneWay}" Background="#050508" Foreground="#00FF66" BorderThickness="0" Margin="0,6,0,5"/>
+                                        <Grid>
+                                            <TextBlock Text="{Binding DetalheFalta}" Foreground="#8AA4C0" FontSize="11"/>
+                                            <TextBlock Text="{Binding AporteSugeridoTexto}" Foreground="#FFB800" FontWeight="Bold" FontSize="11" HorizontalAlignment="Right"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <!-- BARRA RAPIDA DE APORTE + CONVERTER EM LANCAMENTO NO COFRE -->
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="105"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Injetar (R$):" Foreground="#00FF66" FontSize="11" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                            <TextBox x:Name="TxtAporteRapido" Grid.Column="1" Margin="0,0,6,0" Foreground="#00FF66" FontWeight="Bold"
+                                     PreviewTextInput="ApenasDigitos_PreviewTextInput"
+                                     TextChanged="CampoMoeda_TextChanged"/>
+                            <Button Grid.Column="2" Content="+ GUARDAR" Style="{StaticResource NeonGreenButton}" Click="BtnAporteRapido_Click" Padding="10,6" FontSize="10.5" Margin="0,0,6,0"/>
+                            <Button Grid.Column="3" Content="⚡ CONVERTER EM COMPRA" Style="{StaticResource NeonCyanButton}" Click="BtnConverterCaixinha_Click" Padding="10,6" FontSize="10.5" ToolTip="Transforma o saldo guardado na caixinha em um lançamento real no Cofre!"/>
+                            <Button Grid.Column="4" Content="🗑 EXCLUIR" Style="{StaticResource NeonRedButton}" Click="BtnExcluirCaixinha_Click" HorizontalAlignment="Right" Padding="10,6" FontSize="10.5"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <!-- COLUNA DIREITA: ESTRATEGISTA NEURAL DO MINI-ORDIS -->
+                <Border Grid.Column="1" Background="#0E0E16" BorderBrush="#00F0FF" BorderThickness="1" CornerRadius="6" Padding="14" Margin="8,0,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Margin="0,0,0,10">
+                            <TextBlock Text="2. ESTRATEGISTA TÁTICO DO MINI-ORDIS" Foreground="#00F0FF" FontSize="14" FontWeight="Bold"/>
+                            <TextBlock Text="Cruzamento em tempo real: Contracheques + Gastos por Categoria + Calendário Sazonal + Caixinhas" Foreground="#00FF66" FontSize="11" TextWrapping="Wrap" Margin="0,3,0,0"/>
+                        </StackPanel>
+
+                        <TextBox x:Name="TxtRelatorioEstrategico" Grid.Row="1" IsReadOnly="True" TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto" Background="#050508" Foreground="#D0E8FF"
+                                 BorderBrush="#1A2636" Padding="12" FontSize="12"/>
+
+                        <Button Grid.Row="2" Content="⚡ RECALCULAR ESTRATÉGIA COM DADOS ATUAIS" Style="{StaticResource NeonCyanButton}" Click="BtnRecalcularEstrategia_Click" Margin="0,10,0,0"/>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- RODAPE -->
+            <Border Grid.Row="2" Background="#0E0E16" BorderBrush="#1A2636" BorderThickness="0,1,0,0" CornerRadius="0,0,5,5" Padding="16,10">
+                <Grid>
+                    <TextBlock x:Name="TxtStatusCaixinhas" Text="Selecione 'Caixinha para a Viagem' ou 'Novos Upgrades nos PCs' para ajustar o valor pré-definido ou guardar saldo!" Foreground="#8AA4C0" FontSize="11.5" VerticalAlignment="Center"/>
+                    <Button Content="✔ CONCLUIR E VOLTAR AO TERMINAL" Style="{StaticResource NeonCyanButton}" Click="BtnFechar_Click" HorizontalAlignment="Right"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>
+
+
+

@@ -1,0 +1,304 @@
+﻿<Window x:Class="OrdisFinance.UI.JanelaAcessoCofre"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ORDIS // PROTOCOLO DE SEGURANÇA DO COFRE" Icon="pack://application:,,,/ordis_icon.ico"
+        Height="620" Width="650"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        FontFamily="Consolas, Segoe UI">
+
+    <Window.Resources>
+        <Style x:Key="NeonGreenButton" TargetType="Button">
+            <Setter Property="Background" Value="#0A0A10"/>
+            <Setter Property="Foreground" Value="#00FF66"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="16,10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BordaNeon" Background="{TemplateBinding Background}" CornerRadius="4" BorderThickness="1.8" Padding="{TemplateBinding Padding}">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#00FF66" Offset="0.0"/>
+                                    <GradientStop Color="#00E5FF" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <Border.Effect>
+                                <DropShadowEffect Color="#00FF66" BlurRadius="12" ShadowDepth="0" Opacity="0.45"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BordaNeon" Property="Background" Value="#0D2216"/>
+                                <Setter Property="Foreground" Value="#B3FFD1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NeonCyanButton" TargetType="Button">
+            <Setter Property="Background" Value="#0A0A10"/>
+            <Setter Property="Foreground" Value="#00F0FF"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BordaNeon" Background="{TemplateBinding Background}" CornerRadius="4" BorderThickness="1.5" Padding="{TemplateBinding Padding}">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#00F0FF" Offset="0.0"/>
+                                    <GradientStop Color="#7000FF" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BordaNeon" Property="Background" Value="#0B1C26"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TitleCloseButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FF0055"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bg" Background="{TemplateBinding Background}" CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bg" Property="Background" Value="#FF0055"/>
+                                <Setter Property="Foreground" Value="#08080C"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#060609"/>
+            <Setter Property="Foreground" Value="#E0F8FF"/>
+            <Setter Property="BorderBrush" Value="#1F293A"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="9,7"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+
+        <Style TargetType="PasswordBox">
+            <Setter Property="Background" Value="#060609"/>
+            <Setter Property="Foreground" Value="#00FF66"/>
+            <Setter Property="BorderBrush" Value="#1F293A"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="9,7"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+    </Window.Resources>
+
+    <Border Background="#08080C" BorderBrush="#00F0FF" BorderThickness="1.8" CornerRadius="6" Margin="12">
+        <Border.Effect>
+            <DropShadowEffect Color="#00F0FF" BlurRadius="20" ShadowDepth="0" Opacity="0.45"/>
+        </Border.Effect>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="38"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- BARRA DE TITULO -->
+            <Border Grid.Row="0" Background="#050508" BorderBrush="#1A2636" BorderThickness="0,0,0,1" CornerRadius="5,5,0,0"
+                    MouseLeftButtonDown="BarraTitulo_MouseLeftButtonDown" Padding="14,0,8,0">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="🔐" Foreground="#00FF66" FontSize="13" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock x:Name="TxtTituloBarra" Text="CEPHALON ORDIS // AUTENTICAÇÃO NEURAL" Foreground="#00F0FF" FontSize="12" FontWeight="Bold" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✖" Style="{StaticResource TitleCloseButton}" HorizontalAlignment="Right" VerticalAlignment="Center" Click="BtnFechar_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- CABECALHO DO COFRE XXX-YYYY -->
+            <Border Grid.Row="1" Background="#0E0E16" BorderBrush="#1A2636" BorderThickness="0,0,0,1" Padding="18,12">
+                <Grid>
+                    <StackPanel>
+                        <TextBlock Text="CEPHALON ORDIS // FINANCIAL MATRIX" Foreground="#00F0FF" FontSize="18" FontWeight="Bold"/>
+                        <TextBlock x:Name="TxtMatriculaDestaque" Text="COFRE XXX-YYYY // AGUARDANDO CONFIGURAÇÃO INICIAL" Foreground="#00FF66" FontSize="12.5" FontWeight="Bold" Margin="0,3,0,0"/>
+                    </StackPanel>
+                    <TextBlock x:Name="TxtRelogioLogin" Text="00:00:00" Foreground="#00F0FF" FontSize="14" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <!-- CORPO DINAMICO: INSTALACAO | LOGIN | RECUPERACAO POR 3 PALAVRAS-CHAVE -->
+            <Grid Grid.Row="2" Margin="20,12,20,10">
+
+                <!-- 1. PAINEL DE INSTALACAO INICIAL (1a VEZ) + BOTAO DE IMPORTAR BACKUP -->
+                <StackPanel x:Name="PainelInstalacao" Visibility="Collapsed">
+                    <Grid Margin="0,0,0,6">
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="BATISMO DO COFRE // CONFIGURAÇÃO DE INSTALAÇÃO" Foreground="#00FF66" FontSize="13" FontWeight="Bold"/>
+                            <TextBlock Text="Crie um novo Operador abaixo OU importe um Backup existente:" Foreground="#8AA4C0" FontSize="10.5"/>
+                        </StackPanel>
+                        <Button Content="📂 IMPORTAR BACKUP (.ORDISBAK)" Style="{StaticResource NeonCyanButton}" Click="BtnImportarBackup_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10,6" FontSize="11" ToolTip="Restaurar Usuário, Senha, 3 Palavras-Chave, Matrícula e Dados de outro computador!"/>
+                    </Grid>
+
+                    <Grid Margin="0,4,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.2*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                            <TextBlock Text="Nome do Operador:" Foreground="#00F0FF" FontSize="11" FontWeight="Bold"/>
+                            <TextBox x:Name="TxtInstNomeOperador" Margin="0,3,0,0" ToolTip="Digite como o Ordis deve chamá-lo no cabeçalho"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Código de Série:" Foreground="#FFB800" FontSize="11" FontWeight="Bold"/>
+                            <TextBox x:Name="TxtInstCodigoCofre" IsReadOnly="True" Foreground="#FFB800" FontWeight="Bold" Margin="0,3,0,0"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                            <TextBlock Text="Senha de Acesso ao Programa:" Foreground="#00FF66" FontSize="11" FontWeight="Bold"/>
+                            <PasswordBox x:Name="PwdInstSenha" Margin="0,3,0,0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Confirmar Senha:" Foreground="#00FF66" FontSize="11" FontWeight="Bold"/>
+                            <PasswordBox x:Name="PwdInstConfirmar" Margin="0,3,0,0"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Border Background="#0B0E17" BorderBrush="#1A2A3E" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0,0,0,12">
+                        <StackPanel>
+                            <TextBlock Text="🔑 3 PALAVRAS-CHAVE DE RECUPERAÇÃO DE SENHA" Foreground="#FFB800" FontSize="11.5" FontWeight="Bold"/>
+                            <TextBlock Text="Guarde bem estas 3 palavras! Elas também viajam protegidas dentro do seu arquivo de Backup:" Foreground="#8AA4C0" FontSize="10.5" TextWrapping="Wrap" Margin="0,2,0,8"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Margin="0,0,6,0">
+                                    <TextBlock Text="Palavra-Chave 1:" Foreground="#00F0FF" FontSize="10.5"/>
+                                    <TextBox x:Name="TxtInstPalavra1" Margin="0,2,0,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Margin="3,0,3,0">
+                                    <TextBlock Text="Palavra-Chave 2:" Foreground="#00F0FF" FontSize="10.5"/>
+                                    <TextBox x:Name="TxtInstPalavra2" Margin="0,2,0,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Margin="6,0,0,0">
+                                    <TextBlock Text="Palavra-Chave 3:" Foreground="#00F0FF" FontSize="10.5"/>
+                                    <TextBox x:Name="TxtInstPalavra3" Margin="0,2,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <Button Content="⚡ FORJAR COFRE E INICIAR MATRIZ FINANCEIRA" Style="{StaticResource NeonGreenButton}" Click="BtnConcluirInstalacao_Click"/>
+                </StackPanel>
+
+                <!-- 2. PAINEL DE LOGIN PADRAO + BOTAO DE IMPORTAR BACKUP -->
+                <StackPanel x:Name="PainelLogin" Visibility="Collapsed" VerticalAlignment="Center">
+                    <Border Background="#0B0E17" BorderBrush="#1A2636" BorderThickness="1" CornerRadius="6" Padding="20">
+                        <StackPanel>
+                            <TextBlock x:Name="TxtSaudacaoLogin" Text="BEM-VINDO DE VOLTA, OPERADOR" Foreground="#00FF66" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="TxtSubtituloLogin" Text="Insira sua chave criptográfica para destrancar o terminal:" Foreground="#8AA4C0" FontSize="11.5" HorizontalAlignment="Center" Margin="0,4,0,18"/>
+
+                            <TextBlock Text="Senha de Acesso:" Foreground="#00F0FF" FontSize="11.5" FontWeight="Bold"/>
+                            <PasswordBox x:Name="PwdLoginSenha" Margin="0,4,0,16" KeyDown="PwdLoginSenha_KeyDown"/>
+
+                            <Button Content="🔓 DESTRANCAR TERMINAL ORDIS" Style="{StaticResource NeonGreenButton}" Click="BtnEntrarLogin_Click" Margin="0,0,0,10"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0" Content="🔑 ESQUECI A SENHA (3 PALAVRAS)" Style="{StaticResource NeonCyanButton}" Click="BtnIrParaRecuperacao_Click" FontSize="10.5" Margin="0,0,4,0"/>
+                                <Button Grid.Column="1" Content="📂 IMPORTAR BACKUP (.ORDISBAK)" Style="{StaticResource NeonCyanButton}" Click="BtnImportarBackup_Click" FontSize="10.5" Margin="4,0,0,0" ToolTip="Importar Cápsula de Backup com Usuário, Senha, 3 Palavras e Dados!"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- 3. PAINEL DE RECUPERACAO POR 3 PALAVRAS-CHAVE / INSPECAO DO EASTER EGG -->
+                <StackPanel x:Name="PainelRecuperacao" Visibility="Collapsed">
+                    <TextBlock x:Name="TxtTituloRecuperacao" Text="PROTOCOLO DE RECUPERAÇÃO // 3 PALAVRAS-CHAVE" Foreground="#FFB800" FontSize="13.5" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <TextBlock x:Name="TxtInfoEasterEgg" Text="Digite as 3 palavras-chave definidas no momento da instalação para redefinir sua senha e nome de Operador:" Foreground="#8AA4C0" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,12"/>
+
+                    <Border Background="#0B0E17" BorderBrush="#1A2A3E" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0,0,0,12">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="0,0,6,0">
+                                <TextBlock Text="Palavra-Chave 1:" Foreground="#00F0FF" FontSize="10.5"/>
+                                <TextBox x:Name="TxtRecPalavra1" Margin="0,2,0,0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="3,0,3,0">
+                                <TextBlock Text="Palavra-Chave 2:" Foreground="#00F0FF" FontSize="10.5"/>
+                                <TextBox x:Name="TxtRecPalavra2" Margin="0,2,0,0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Margin="6,0,0,0">
+                                <TextBlock Text="Palavra-Chave 3:" Foreground="#00F0FF" FontSize="10.5"/>
+                                <TextBox x:Name="TxtRecPalavra3" Margin="0,2,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <Grid Margin="0,0,0,14">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                            <TextBlock Text="Nome do Operador:" Foreground="#00FF66" FontSize="11" FontWeight="Bold"/>
+                            <TextBox x:Name="TxtRecNovoNome" Margin="0,3,0,0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Nova Senha de Acesso:" Foreground="#00FF66" FontSize="11" FontWeight="Bold"/>
+                            <PasswordBox x:Name="PwdRecNovaSenha" Margin="0,3,0,0"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="⬅ VOLTAR" Style="{StaticResource NeonCyanButton}" Click="BtnVoltarParaLogin_Click" Margin="0,0,10,0"/>
+                        <Button Grid.Column="1" Content="✔ VALIDAR 3 PALAVRAS E SALVAR NOVA SENHA" Style="{StaticResource NeonGreenButton}" Click="BtnConfirmarRecuperacao_Click"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+
+            <!-- RODAPE -->
+            <Border Grid.Row="3" Background="#0E0E16" BorderBrush="#1A2636" BorderThickness="0,1,0,0" CornerRadius="0,0,5,5" Padding="16,10">
+                <TextBlock x:Name="TxtStatusSeguranca" Text="Criptografia Local SHA-256 + Cápsula Portátil (.ordisbak) Ativa." Foreground="#6C849E" FontSize="11" HorizontalAlignment="Center"/>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,15 @@
+﻿# Blindagem de Dados Pessoais e Criptograficos do Operador
+**/CofreDados/
+*.db
+*.db-shm
+*.db-wal
+*.ordisbak
+*identidade_cofre.json
+*.csv
+
+# Pastas de Compilacao e Temporarios
+bin/
+obj/
+.vs/
+DIST_INSTALADOR/
+OrdisFinance.SetupBuilder/

@@ -1,0 +1,364 @@
+﻿<Window x:Class="OrdisFinance.UI.JanelaExploradorArquivos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MINI-ORDIS // EXPLORADOR NEURAL DE ARQUIVOS" Height="620" Width="960"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        FontFamily="Consolas, Segoe UI">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="Background" Value="#060609"/>
+            <Setter Property="Width" Value="8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Border Background="#060609" BorderBrush="#152232" BorderThickness="1" CornerRadius="4">
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="{x:Type Thumb}">
+                                                <Border CornerRadius="4" Margin="1">
+                                                    <Border.Background>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                            <GradientStop Color="#00F0FF" Offset="0.0"/>
+                                                            <GradientStop Color="#00FF66" Offset="1.0"/>
+                                                        </LinearGradientBrush>
+                                                    </Border.Background>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NeonGreenButton" TargetType="Button">
+            <Setter Property="Background" Value="#0A0A10"/>
+            <Setter Property="Foreground" Value="#00FF66"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="16,9"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BordaNeon" Background="{TemplateBinding Background}" CornerRadius="4" BorderThickness="1.8" Padding="{TemplateBinding Padding}">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#00FF66" Offset="0.0"/>
+                                    <GradientStop Color="#00E5FF" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <Border.Effect>
+                                <DropShadowEffect Color="#00FF66" BlurRadius="10" ShadowDepth="0" Opacity="0.4"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BordaNeon" Property="Background" Value="#0D2216"/>
+                                <Setter Property="Foreground" Value="#B3FFD1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NeonCyanButton" TargetType="Button">
+            <Setter Property="Background" Value="#0A0A10"/>
+            <Setter Property="Foreground" Value="#00F0FF"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BordaNeon" Background="{TemplateBinding Background}" CornerRadius="4" BorderThickness="1.5" Padding="{TemplateBinding Padding}">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#00F0FF" Offset="0.0"/>
+                                    <GradientStop Color="#7000FF" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BordaNeon" Property="Background" Value="#0B1C26"/>
+                                <Setter TargetName="BordaNeon" Property="BorderBrush" Value="#00FF66"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SidebarNavButton" TargetType="Button">
+            <Setter Property="Background" Value="#08080C"/>
+            <Setter Property="Foreground" Value="#D0E8FF"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BordaNav" Background="{TemplateBinding Background}" BorderBrush="#182436" BorderThickness="1" CornerRadius="4" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BordaNav" Property="Background" Value="#0C1E2C"/>
+                                <Setter TargetName="BordaNav" Property="BorderBrush" Value="#00F0FF"/>
+                                <Setter Property="Foreground" Value="#00FF66"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NeonRedButton" TargetType="Button">
+            <Setter Property="Background" Value="#0A0A10"/>
+            <Setter Property="Foreground" Value="#FF0055"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="16,9"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BordaNeon" Background="{TemplateBinding Background}" CornerRadius="4" BorderThickness="1.5" BorderBrush="#FF0055" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BordaNeon" Property="Background" Value="#260B15"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TitleCloseButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FF0055"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bg" Background="{TemplateBinding Background}" CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bg" Property="Background" Value="#FF0055"/>
+                                <Setter Property="Foreground" Value="#08080C"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#060609"/>
+            <Setter Property="Foreground" Value="#E0F8FF"/>
+            <Setter Property="BorderBrush" Value="#1F293A"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="FontSize" Value="12.5"/>
+        </Style>
+    </Window.Resources>
+
+    <Border Background="#08080C" BorderBrush="#00F0FF" BorderThickness="1.8" CornerRadius="6" Margin="10">
+        <Border.Effect>
+            <DropShadowEffect Color="#00F0FF" BlurRadius="18" ShadowDepth="0" Opacity="0.4"/>
+        </Border.Effect>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="38"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- BARRA DE TITULO ESCURA CUSTOMIZADA -->
+            <Border Grid.Row="0" Background="#050508" BorderBrush="#1A2636" BorderThickness="0,0,0,1" CornerRadius="5,5,0,0"
+                    MouseLeftButtonDown="BarraTitulo_MouseLeftButtonDown" Padding="14,0,8,0">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="📂" Foreground="#00F0FF" FontSize="13" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock Text="MINI-ORDIS // EXPLORADOR NEURAL DE DOCUMENTOS E FATURAS (PDF / IMG / TXT)" Foreground="#00F0FF" FontSize="12.5" FontWeight="Bold" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✖" Style="{StaticResource TitleCloseButton}" HorizontalAlignment="Right" VerticalAlignment="Center" Click="BtnCancelar_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- BARRA DE ENDERECO E PESQUISA -->
+            <Border Grid.Row="1" Background="#0E0E16" BorderBrush="#1A2636" BorderThickness="0,0,0,1" Padding="14,10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="220"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Content="⬆ SUBIR" Style="{StaticResource NeonCyanButton}" Click="BtnSubirPasta_Click" Margin="0,0,8,0" ToolTip="Voltar para a pasta anterior"/>
+                    
+                    <TextBox x:Name="TxtCaminhoAtual" Grid.Column="1" Margin="0,0,8,0" Foreground="#00FF66" KeyDown="TxtCaminhoAtual_KeyDown" ToolTip="Caminho atual (Pressione Enter para ir)"/>
+
+                    <Grid Grid.Column="2">
+                        <TextBox x:Name="TxtBuscaArquivo" TextChanged="TxtBuscaArquivo_TextChanged" Padding="8,6,26,6" ToolTip="Filtrar arquivos na pasta atual"/>
+                        <TextBlock Text="🔍" Foreground="#5A728A" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0" IsHitTestVisible="False"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <!-- CORPO PRINCIPAL: ATALHOS RAPIDOS NA ESQUERDA + GRADE DE ARQUIVOS NA DIREITA -->
+            <Grid Grid.Row="2" Margin="14,10,14,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="205"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- BARRA LATERAL DE ATALHOS (DOWNLOADS, DESKTOP, DOCUMENTOS, DISCOS) -->
+                <Border Grid.Column="0" Background="#0E0E16" BorderBrush="#1A2636" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,0,10,0">
+                    <StackPanel>
+                        <TextBlock Text="ACESSO RÁPIDO NEURAL" Foreground="#00F0FF" FontSize="11.5" FontWeight="Bold" Margin="2,0,0,8"/>
+                        <Button Content="⬇  Downloads" Style="{StaticResource SidebarNavButton}" Click="BtnAtalhoDownloads_Click"/>
+                        <Button Content="🖥  Área de Trabalho" Style="{StaticResource SidebarNavButton}" Click="BtnAtalhoDesktop_Click"/>
+                        <Button Content="📄  Documentos" Style="{StaticResource SidebarNavButton}" Click="BtnAtalhoDocumentos_Click"/>
+                        
+                        <TextBlock Text="UNIDADES DE DISCO" Foreground="#00F0FF" FontSize="11.5" FontWeight="Bold" Margin="2,12,0,8"/>
+                        <ItemsControl x:Name="ListaDiscos">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Content="{Binding NomeExibicao}" Tag="{Binding CaminhoRaiz}" Style="{StaticResource SidebarNavButton}" Click="BtnAtalhoDisco_Click"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <Border Background="#060609" BorderBrush="#152232" BorderThickness="1" CornerRadius="4" Padding="8" Margin="0,12,0,0">
+                            <StackPanel>
+                                <CheckBox x:Name="ChkApenasSuportados" Content="Apenas Suportados" IsChecked="True" Foreground="#00FF66" FontSize="11" Checked="FiltroSuportados_Changed" Unchecked="FiltroSuportados_Changed"/>
+                                <TextBlock Text="(.pdf, .png, .jpg, .txt)" Foreground="#6C849E" FontSize="10" Margin="18,2,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- LISTA CUSTOMIZADA DE PASTAS E ARQUIVOS -->
+                <Border Grid.Column="1" Background="#0E0E16" BorderBrush="#1A2636" BorderThickness="1" CornerRadius="5" Padding="8">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- CABECALHO DAS COLUNAS -->
+                        <Border Grid.Row="0" Background="#121622" Padding="10,6" CornerRadius="4,4,0,0" Margin="0,0,0,4">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="85"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="155"/>
+                                    <ColumnDefinition Width="90"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="TIPO" Foreground="#00F0FF" FontWeight="Bold" FontSize="11"/>
+                                <TextBlock Grid.Column="1" Text="NOME DO ARQUIVO / PASTA" Foreground="#00F0FF" FontWeight="Bold" FontSize="11"/>
+                                <TextBlock Grid.Column="2" Text="MODIFICADO EM" Foreground="#00F0FF" FontWeight="Bold" FontSize="11"/>
+                                <TextBlock Grid.Column="3" Text="TAMANHO" Foreground="#00F0FF" FontWeight="Bold" FontSize="11" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- ITENS -->
+                        <ListBox x:Name="ListaArquivos" Grid.Row="1" Background="#08080C" BorderThickness="0"
+                                 SelectionMode="Extended"
+                                 SelectionChanged="ListaArquivos_SelectionChanged"
+                                 MouseDoubleClick="ListaArquivos_MouseDoubleClick"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Margin" Value="0,1"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <Border x:Name="RowBorder" Background="#0A0A10" BorderBrush="#141E2C" BorderThickness="1" CornerRadius="4" Padding="8,6">
+                                                    <ContentPresenter/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="RowBorder" Property="Background" Value="#0E2232"/>
+                                                        <Setter TargetName="RowBorder" Property="BorderBrush" Value="#00F0FF"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter TargetName="RowBorder" Property="Background" Value="#102C20"/>
+                                                        <Setter TargetName="RowBorder" Property="BorderBrush" Value="#00FF66"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="85"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="155"/>
+                                            <ColumnDefinition Width="90"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Grid.Column="0" Background="{Binding FundoBadge}" BorderBrush="{Binding CorTipo}" BorderThickness="1" CornerRadius="3" Padding="6,2" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding TipoBadge}" Foreground="{Binding CorTipo}" FontWeight="Bold" FontSize="10.5"/>
+                                        </Border>
+
+                                        <TextBlock Grid.Column="1" Text="{Binding Nome}" Foreground="#E0F8FF" FontSize="12.5" FontWeight="SemiBold" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="4,0,10,0"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding DataFormatada}" Foreground="{Binding CorData}" FontSize="11" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="3" Text="{Binding TamanhoFormatado}" Foreground="#8AA4C0" FontSize="11" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- RODAPE: ARQUIVO SELECIONADO E BOTOES DE ACAO -->
+            <Border Grid.Row="3" Background="#0E0E16" BorderBrush="#1A2636" BorderThickness="0,1,0,0" CornerRadius="0,0,5,5" Padding="14,10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Selecionado:" Foreground="#8AA4C0" FontSize="12" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBox x:Name="TxtArquivoSelecionado" Grid.Column="1" IsReadOnly="True" Foreground="#00FF66" Margin="0,0,14,0"/>
+
+                    <StackPanel Grid.Column="2" Orientation="Horizontal">
+                        <Button Content="✖ CANCELAR" Style="{StaticResource NeonRedButton}" Click="BtnCancelar_Click" Margin="0,0,10,0"/>
+                        <Button Content="✔ IMPORTAR PARA QUARENTENA" Style="{StaticResource NeonGreenButton}" Click="BtnImportar_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

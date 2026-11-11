@@ -1,0 +1,127 @@
+﻿<Window x:Class="OrdisFinance.UI.JanelaMensagem"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MINI-ORDIS // COMUNICADO" Width="540" SizeToContent="Height"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        FontFamily="Consolas, Segoe UI">
+
+    <Window.Resources>
+        <Style x:Key="NeonGreenButton" TargetType="Button">
+            <Setter Property="Background" Value="#0A0A10"/>
+            <Setter Property="Foreground" Value="#00FF66"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="18,9"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BordaNeon" Background="{TemplateBinding Background}" CornerRadius="4" BorderThickness="1.8" Padding="{TemplateBinding Padding}">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#00FF66" Offset="0.0"/>
+                                    <GradientStop Color="#00E5FF" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <Border.Effect>
+                                <DropShadowEffect Color="#00FF66" BlurRadius="10" ShadowDepth="0" Opacity="0.4"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BordaNeon" Property="Background" Value="#0D2216"/>
+                                <Setter Property="Foreground" Value="#B3FFD1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NeonRedButton" TargetType="Button">
+            <Setter Property="Background" Value="#0A0A10"/>
+            <Setter Property="Foreground" Value="#FF0055"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="16,9"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BordaNeon" Background="{TemplateBinding Background}" CornerRadius="4" BorderThickness="1.8" BorderBrush="#FF0055" Padding="{TemplateBinding Padding}">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#FF0055" BlurRadius="10" ShadowDepth="0" Opacity="0.35"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BordaNeon" Property="Background" Value="#260B15"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TitleCloseButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FF0055"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bg" Background="{TemplateBinding Background}" CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bg" Property="Background" Value="#FF0055"/>
+                                <Setter Property="Foreground" Value="#08080C"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border x:Name="BordaExterna" Background="#08080C" BorderBrush="#00F0FF" BorderThickness="1.8" CornerRadius="6" Margin="12">
+        <Border.Effect>
+            <DropShadowEffect x:Name="SombraJanela" Color="#00F0FF" BlurRadius="18" ShadowDepth="0" Opacity="0.45"/>
+        </Border.Effect>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="36"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- BARRA DE TITULO ESCURA CUSTOMIZADA -->
+            <Border Grid.Row="0" Background="#050508" BorderBrush="#1A2636" BorderThickness="0,0,0,1" CornerRadius="5,5,0,0"
+                    MouseLeftButtonDown="BarraTitulo_MouseLeftButtonDown" Padding="12,0,8,0">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock x:Name="TxtIconeTitulo" Text="⚡" Foreground="#00F0FF" FontSize="13" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock x:Name="TxtTituloJanela" Text="MINI-ORDIS // TRANSMISSÃO NEURAL" Foreground="#00F0FF" FontSize="12.5" FontWeight="Bold" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✖" Style="{StaticResource TitleCloseButton}" HorizontalAlignment="Right" VerticalAlignment="Center" Click="BtnCancelar_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- CORPO DA MENSAGEM -->
+            <Border Grid.Row="1" Background="#0E0E16" Padding="18,16" Margin="10,10,10,6" CornerRadius="4" BorderBrush="#162232" BorderThickness="1">
+                <TextBlock x:Name="TxtMensagem" Text="Mensagem do sistema..." Foreground="#E0F8FF" FontSize="13" TextWrapping="Wrap" LineHeight="20"/>
+            </Border>
+
+            <!-- BOTOES DE ACAO TEMATICOS -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="12,6,12,14">
+                <Button x:Name="BtnCancelar" Content="✖ CANCELAR" Style="{StaticResource NeonRedButton}" Click="BtnCancelar_Click" Margin="0,0,10,0" Visibility="Collapsed"/>
+                <Button x:Name="BtnConfirmar" Content="✔ ENTENDIDO" Style="{StaticResource NeonGreenButton}" Click="BtnConfirmar_Click"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

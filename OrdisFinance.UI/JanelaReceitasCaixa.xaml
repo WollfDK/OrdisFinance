@@ -1,0 +1,479 @@
+﻿<Window x:Class="OrdisFinance.UI.JanelaReceitasCaixa"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MINI-ORDIS // CENTRAL DE CAIXA E CONTRACHEQUES" Height="740" Width="1150"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        FontFamily="Consolas, Segoe UI">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="Background" Value="#060609"/>
+            <Setter Property="Width" Value="8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Border Background="#060609" BorderBrush="#152232" BorderThickness="1" CornerRadius="4">
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="{x:Type Thumb}">
+                                                <Border CornerRadius="4" Margin="1">
+                                                    <Border.Background>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                            <GradientStop Color="#00F0FF" Offset="0.0"/>
+                                                            <GradientStop Color="#00FF66" Offset="1.0"/>
+                                                        </LinearGradientBrush>
+                                                    </Border.Background>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NeonGreenButton" TargetType="Button">
+            <Setter Property="Background" Value="#0A0A10"/>
+            <Setter Property="Foreground" Value="#00FF66"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="14,9"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BordaNeon" Background="{TemplateBinding Background}" CornerRadius="4" BorderThickness="1.8" Padding="{TemplateBinding Padding}">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#00FF66" Offset="0.0"/>
+                                    <GradientStop Color="#00E5FF" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <Border.Effect>
+                                <DropShadowEffect Color="#00FF66" BlurRadius="10" ShadowDepth="0" Opacity="0.4"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BordaNeon" Property="Background" Value="#0D2216"/>
+                                <Setter Property="Foreground" Value="#B3FFD1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NeonCyanButton" TargetType="Button">
+            <Setter Property="Background" Value="#0A0A10"/>
+            <Setter Property="Foreground" Value="#00F0FF"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="14,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BordaNeon" Background="{TemplateBinding Background}" CornerRadius="4" BorderThickness="1.6" Padding="{TemplateBinding Padding}">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#00F0FF" Offset="0.0"/>
+                                    <GradientStop Color="#7000FF" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BordaNeon" Property="Background" Value="#0B1C26"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NeonRedButton" TargetType="Button">
+            <Setter Property="Background" Value="#0A0A10"/>
+            <Setter Property="Foreground" Value="#FF0055"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="14,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BordaNeon" Background="{TemplateBinding Background}" CornerRadius="4" BorderThickness="1.5" BorderBrush="#FF0055" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BordaNeon" Property="Background" Value="#260B15"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TitleCloseButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FF0055"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bg" Background="{TemplateBinding Background}" CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bg" Property="Background" Value="#FF0055"/>
+                                <Setter Property="Foreground" Value="#08080C"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#060609"/>
+            <Setter Property="Foreground" Value="#E0F8FF"/>
+            <Setter Property="BorderBrush" Value="#1F293A"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Foreground" Value="#00F0FF"/>
+            <Setter Property="Background" Value="#060609"/>
+            <Setter Property="BorderBrush" Value="#1F293A"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Focusable="False"
+                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          ClickMode="Press">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border x:Name="BordaCombo" Background="#060609" BorderBrush="#1F293A" BorderThickness="1" CornerRadius="2">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="24"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Path Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z" Fill="#00F0FF"/>
+                                            </Grid>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="BordaCombo" Property="BorderBrush" Value="#00F0FF"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <ContentPresenter IsHitTestVisible="False"
+                                              Content="{TemplateBinding SelectionBoxItem}"
+                                              Margin="8,5,24,5"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Left"/>
+                            <Popup Placement="Bottom"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   PopupAnimation="Slide">
+                                <Grid MinWidth="{TemplateBinding ActualWidth}" MaxHeight="220">
+                                    <Border Background="#08080C" BorderThickness="1" BorderBrush="#00F0FF" CornerRadius="4">
+                                        <ScrollViewer Margin="2">
+                                            <StackPanel IsItemsHost="True"/>
+                                        </ScrollViewer>
+                                    </Border>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="#08080C"/>
+            <Setter Property="Foreground" Value="#E0F8FF"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border x:Name="ItemBorder" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="True">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="#0D2636"/>
+                                <Setter Property="Foreground" Value="#00FF66"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border Background="#08080C" BorderBrush="#00F0FF" BorderThickness="1.8" CornerRadius="6" Margin="10">
+        <Border.Effect>
+            <DropShadowEffect Color="#00F0FF" BlurRadius="18" ShadowDepth="0" Opacity="0.4"/>
+        </Border.Effect>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="38"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- BARRA DE TITULO ESCURA CUSTOMIZADA -->
+            <Border Grid.Row="0" Background="#050508" BorderBrush="#1A2636" BorderThickness="0,0,0,1" CornerRadius="5,5,0,0"
+                    MouseLeftButtonDown="BarraTitulo_MouseLeftButtonDown" Padding="14,0,8,0">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="💰" Foreground="#00FF66" FontSize="13" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock Text="MINI-ORDIS // SLOT TÁTICO 1: CENTRAL DE CAIXA, CONTRACHEQUES &amp; AUTO-COMPLETE BIDIRECIONAL" Foreground="#00F0FF" FontSize="12.5" FontWeight="Bold" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✖" Style="{StaticResource TitleCloseButton}" HorizontalAlignment="Right" VerticalAlignment="Center" Click="BtnFechar_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- HUD DE TELEMETRIA DO CAIXA E PODER DE FOGO DIARIO -->
+            <Border Grid.Row="1" Background="#0E0E16" BorderBrush="#00FF66" BorderThickness="1" CornerRadius="6" Padding="14,10" Margin="16,12,16,8">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.4*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                        <TextBlock x:Name="TxtResumoCaixaTopo" Text="CAIXA LÍQUIDO DO MÊS: R$ 0,00 | GASTOS LÍQUIDOS: R$ 0,00" Foreground="#00FF66" FontSize="14" FontWeight="Bold"/>
+                        <TextBlock x:Name="TxtPoderDeFogoDiario" Text="Calculando poder de fogo diário..." Foreground="#00F0FF" FontSize="12" FontWeight="Bold" Margin="0,4,0,0"/>
+                        <TextBlock x:Name="TxtDetalheImpostosMes" Text="Retenções na fonte (INSS/IRRF/Descontos): R$ 0,00" Foreground="#8AA4C0" FontSize="11" Margin="0,3,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <TextBlock Text="Mês/Ano de Referência:" Foreground="#8AA4C0" FontSize="11.5" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <ComboBox x:Name="ComboMesCaixa" Width="86" SelectionChanged="FiltroMesAno_Changed" Margin="0,0,6,0"/>
+                        <ComboBox x:Name="ComboAnoCaixa" Width="78" SelectionChanged="FiltroMesAno_Changed"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- CORPO DIVIDIDO -->
+            <Grid Grid.Row="2" Margin="16,4,16,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.12*"/>
+                    <ColumnDefinition Width="1.12*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- COLUNA ESQUERDA: LANCAMENTO COM AUTO-COMPLETE BIDIRECIONAL (NOME <-> CPF) -->
+                <Border Grid.Column="0" Background="#0E0E16" BorderBrush="#1A2636" BorderThickness="1" CornerRadius="6" Padding="14" Margin="0,0,8,0">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,10">
+                            <TextBlock Text="1. LANÇAR ENTRADA (AUTO-COMPLETE NOME ⇄ CPF)" Foreground="#00F0FF" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+                            <Button Content="📂 IMPORTAR PDF (OPCIONAL)" Style="{StaticResource NeonCyanButton}" Click="BtnImportarHolerite_Click" HorizontalAlignment="Right" Padding="10,4" FontSize="10.5"/>
+                        </Grid>
+
+                        <StackPanel Margin="0,0,0,8">
+                            <TextBlock Text="Titulares Memorizados no Cofre (ou digite Nome ou CPF abaixo):" Foreground="#8AA4C0" FontSize="11"/>
+                            <ComboBox x:Name="ComboPerfisSalvos" SelectionChanged="ComboPerfisSalvos_SelectionChanged" Margin="0,2,0,0"/>
+                        </StackPanel>
+
+                        <!-- NOME COM AUTO-COMPLETE E CPF COM AUTO-COMPLETE BIDIRECIONAL -->
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.45*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- CAMPO NOME -->
+                            <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                                <TextBlock x:Name="LblNomeTitular" Text="Nome do Titular (Auto-Complete ⇄ CPF):" Foreground="#00FF66" FontSize="11" FontWeight="Bold"/>
+                                <Grid>
+                                    <TextBox x:Name="TxtNomeTitular" Margin="0,2,0,0"
+                                             TextChanged="TxtNomeTitular_TextChanged"
+                                             PreviewKeyDown="TxtNomeTitular_PreviewKeyDown"
+                                             ToolTip="Digite o inicio do Nome para puxar o CPF automaticamente!"/>
+                                    <Popup x:Name="PopupAutoCompleteNome" PlacementTarget="{Binding ElementName=TxtNomeTitular}" Placement="Bottom"
+                                           AllowsTransparency="True" StaysOpen="False" Focusable="False">
+                                        <Border Background="#050508" BorderBrush="#00FF66" BorderThickness="1.5" CornerRadius="4"
+                                                Width="{Binding ActualWidth, ElementName=TxtNomeTitular}" MaxHeight="150">
+                                            <ListBox x:Name="ListaSugestoesNome" Background="Transparent" Foreground="#00FF66" BorderThickness="0"
+                                                     FontSize="12" Cursor="Hand" MouseLeftButtonUp="ListaSugestoesNome_MouseLeftButtonUp"/>
+                                        </Border>
+                                    </Popup>
+                                </Grid>
+                            </StackPanel>
+
+                            <!-- CAMPO CPF COM AUTO-COMPLETE REVERSO -->
+                            <StackPanel Grid.Column="1">
+                                <TextBlock x:Name="LblCpfTitular" Text="CPF (Auto-Complete ⇄ Nome):" Foreground="#00FF66" FontSize="11" FontWeight="Bold"/>
+                                <Grid>
+                                    <TextBox x:Name="TxtCpfTitular" Margin="0,2,0,0" MaxLength="14"
+                                             PreviewTextInput="ApenasDigitos_PreviewTextInput"
+                                             PreviewKeyDown="TxtCpfTitular_PreviewKeyDown"
+                                             TextChanged="TxtCpfTitular_TextChanged"
+                                             ToolTip="Comece a digitar o CPF para autocompletar e puxar o Nome do titular!"/>
+                                    <Popup x:Name="PopupAutoCompleteCpf" PlacementTarget="{Binding ElementName=TxtCpfTitular}" Placement="Bottom"
+                                           AllowsTransparency="True" StaysOpen="False" Focusable="False">
+                                        <Border Background="#050508" BorderBrush="#00F0FF" BorderThickness="1.5" CornerRadius="4"
+                                                MinWidth="260" MaxHeight="150">
+                                            <ListBox x:Name="ListaSugestoesCpf" Background="Transparent" Foreground="#00F0FF" BorderThickness="0"
+                                                     FontSize="12" Cursor="Hand" MouseLeftButtonUp="ListaSugestoesCpf_MouseLeftButtonUp"/>
+                                        </Border>
+                                    </Popup>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- NATUREZA, DESCRICAO E DATA AUTOMATICA -->
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.2*"/>
+                                <ColumnDefinition Width="1.2*"/>
+                                <ColumnDefinition Width="0.85*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="0,0,6,0">
+                                <TextBlock Text="Natureza da Entrada:" Foreground="#00F0FF" FontSize="11" FontWeight="Bold"/>
+                                <ComboBox x:Name="ComboNaturezaReceita" SelectionChanged="ComboNaturezaReceita_SelectionChanged" Margin="0,2,0,0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="0,0,6,0">
+                                <TextBlock Text="Descrição / Empresa:" Foreground="#8AA4C0" FontSize="11"/>
+                                <TextBox x:Name="TxtDescricaoReceita" Text="Contracheque Mensal" Margin="0,2,0,0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="Data Entrada:" Foreground="#00FF66" FontSize="11" FontWeight="Bold"/>
+                                <TextBox x:Name="TxtDataEntrada" Margin="0,2,0,0" MaxLength="10"
+                                         PreviewTextInput="ApenasDigitos_PreviewTextInput"
+                                         TextChanged="TxtDataEntrada_TextChanged"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- VALORES: CALCULADORA TRIANGULAR -->
+                        <Border Background="#08080C" BorderBrush="#162232" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,12">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition x:Name="ColBruto" Width="*"/>
+                                    <ColumnDefinition x:Name="ColDescontos" Width="*"/>
+                                    <ColumnDefinition Width="1.2*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel x:Name="PainelBruto" Grid.Column="0" Margin="0,0,6,0">
+                                    <TextBlock Text="Bruto (Opcional):" Foreground="#8AA4C0" FontSize="10.5"/>
+                                    <TextBox x:Name="TxtValorBruto" Margin="0,3,0,0"
+                                             PreviewTextInput="ApenasDigitos_PreviewTextInput"
+                                             TextChanged="CampoMoeda_TextChanged"/>
+                                </StackPanel>
+                                <StackPanel x:Name="PainelDescontos" Grid.Column="1" Margin="0,0,6,0">
+                                    <TextBlock Text="INSS/Desc (Opcional):" Foreground="#FFB800" FontSize="10.5"/>
+                                    <TextBox x:Name="TxtValorDescontos" Margin="0,3,0,0" Foreground="#FFB800"
+                                             PreviewTextInput="ApenasDigitos_PreviewTextInput"
+                                             TextChanged="CampoMoeda_TextChanged"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock x:Name="LblValorLiquido" Text="VALOR LÍQUIDO REAL (R$):" Foreground="#00FF66" FontSize="10.5" FontWeight="Bold"/>
+                                    <TextBox x:Name="TxtValorLiquido" Margin="0,3,0,0" Foreground="#00FF66" FontWeight="Bold" BorderBrush="#00FF66"
+                                             PreviewTextInput="ApenasDigitos_PreviewTextInput"
+                                             TextChanged="CampoMoeda_TextChanged"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <!-- BOTOES DE INJECAO -->
+                        <Button x:Name="BtnSalvarPrincipal" Content="✔ SALVAR NO CAIXA E VINCULAR CPF ⇄ NOME" Style="{StaticResource NeonGreenButton}" Click="BtnSalvarEntrada_Click" Margin="0,0,0,8"/>
+                        <Button Content="⚡ CLONAR / INJETAR CONTRACHEQUES SALVOS NO MÊS (1 CLIQUE)" Style="{StaticResource NeonCyanButton}" Click="BtnClonarSalariosBase_Click" FontSize="11.5"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- COLUNA DIREITA: ENTRADAS E CONTRACHEQUES REGISTRADOS NO MES -->
+                <Border Grid.Column="1" Background="#0E0E16" BorderBrush="#1A2636" BorderThickness="1" CornerRadius="6" Padding="14" Margin="8,0,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="2. ENTRADAS, HOLERITES E REEMBOLSOS DO MÊS" Foreground="#00FF66" FontSize="13.5" FontWeight="Bold" Margin="0,0,0,8"/>
+
+                        <ListBox x:Name="ListaEntradasMes" Grid.Row="1" Background="#08080C" BorderBrush="#1F293A"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,10"
+                                 MouseDoubleClick="ListaEntradasMes_MouseDoubleClick">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Margin" Value="0,2"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <Border x:Name="Card" Background="#0B0E17" BorderBrush="#182436" BorderThickness="1" CornerRadius="4" Padding="10,7">
+                                                    <ContentPresenter/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="Card" Property="BorderBrush" Value="#00F0FF"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter TargetName="Card" Property="Background" Value="#10281E"/>
+                                                        <Setter TargetName="Card" Property="BorderBrush" Value="#00FF66"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0">
+                                            <TextBlock Text="{Binding LinhaPrincipal}" Foreground="#00F0FF" FontWeight="Bold" FontSize="12.5"/>
+                                            <TextBlock Text="{Binding ValorLiquidoTexto}" Foreground="#00FF66" FontWeight="Bold" FontSize="13" HorizontalAlignment="Right"/>
+                                        </Grid>
+                                        <TextBlock Grid.Row="1" Text="{Binding LinhaSecundaria}" Foreground="#8AA4C0" FontSize="11" Margin="0,3,0,0"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Content="✎ EDITAR SELECIONADA" Style="{StaticResource NeonCyanButton}" Click="BtnEditarEntrada_Click" Margin="0,0,10,0" ToolTip="Também pode dar 2 cliques em cima da entrada na lista!"/>
+                            <Button Content="🗑 EXCLUIR ENTRADA SELECIONADA" Style="{StaticResource NeonRedButton}" Click="BtnExcluirEntrada_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- RODAPE -->
+            <Border Grid.Row="3" Background="#0E0E16" BorderBrush="#1A2636" BorderThickness="0,1,0,0" CornerRadius="0,0,5,5" Padding="16,10">
+                <Grid>
+                    <TextBlock x:Name="TxtStatusRodape" Text="Auto-Complete Duplo Ativo: Digite o início do Nome OU do CPF para preencher os dados vinculados na hora!" Foreground="#00FF66" FontSize="11.5" VerticalAlignment="Center"/>
+                    <Button Content="✔ CONCLUIR E ATUALIZAR ESCUDO" Style="{StaticResource NeonCyanButton}" Click="BtnFechar_Click" HorizontalAlignment="Right"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>
